@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  siusan-server:
+    build: ./server
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./server/:/usr/src/app/
+    ports:
+      - 8009:8000
+    env_file:
+      - ./server/.env.dev
+    depends_on:
+      - siusan-db
+  
+  siusan-db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_siusan_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=siusan
+      - POSTGRES_PASSWORD=siusan
+      - POSTGRES_DB=siusan_dev
+
+volumes:
+  postgres_siusan_data:
