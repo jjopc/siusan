@@ -3,6 +3,7 @@
 
 .vscode
 .dockerignore
+test_foo.py
 
 ### Django ###
 *.log
