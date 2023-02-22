@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # 3rd party apps
     "rest_framework",
+    "rest_framework.authtoken",
+    "corsheaders",
+    "django_extensions",
+    "dj_rest_auth",
+    "rest_framework_simplejwt",
     # local apps
     "users",
 ]
@@ -49,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -133,4 +139,42 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Custom User
 AUTH_USER_MODEL = "users.CustomUser"
+
+# CORS Headers para SPA con React
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000",
+    "http://localhost:8000",
+)
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
+# DRF settings
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",  # for testing through web API
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ],
+}
+
+# DJ-REST-AUTH
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "siusan-auth-token",
+    "JWT_AUTH_REFRESH_COOKIE": "siusan-refresh-token",
+}
+
+# Para testear el reset de contraseña
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "dummyuser")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "password")
+EMAIL_USE_SSL = False
