@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_extensions",
     "dj_rest_auth",
+    "rest_framework_simplejwt",
     # local apps
     "users",
 ]
@@ -156,7 +157,6 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",  # for testing through web API
-        "rest_framework.authentication.TokenAuthentication",
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ],
 }
