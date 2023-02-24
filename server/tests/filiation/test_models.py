@@ -9,7 +9,7 @@ def test_patient_model():
         first_name="John",
         last_name="Doe",
         dni="12345678A",
-        # birthday="01/01/1970",
+        # TODO: birthday="01/01/1970",
         birthday="1970-01-01",
         genre="M",
         email="john@doe.com",

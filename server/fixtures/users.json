@@ -1,0 +1,20 @@
+[
+{
+    "model": "users.customuser",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$fInWolDTiEqw0tzo2Gxyv9$Vlpx7SE7ntw1vwSgBbe5PQ9AziEbeDrQkt2JUICs0jE=",
+        "last_login": "2023-02-24T15:18:17.545Z",
+        "is_superuser": true,
+        "username": "jjopc",
+        "first_name": "",
+        "last_name": "",
+        "email": "jjopc@duck.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-02-24T15:18:12.196Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
