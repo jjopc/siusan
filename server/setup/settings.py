@@ -153,7 +153,11 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:8000",
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8009",
+    "http://localhost",
+]
 
 # DRF settings
 REST_FRAMEWORK = {

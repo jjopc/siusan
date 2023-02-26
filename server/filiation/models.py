@@ -4,7 +4,7 @@ from django.db import models
 class Patient(models.Model):
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
-    dni = models.CharField(max_length=10, unique=True, null=False, default=None)
+    dni = models.CharField(max_length=10, unique=True, null=False)
     birthday = models.DateField(null=True)
     genre = models.CharField(
         max_length=1,
