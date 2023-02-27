@@ -6,14 +6,23 @@ from filiation.models import Patient
 from users.models import CustomUser
 
 
-# @pytest.fixture(scope="function")
-# def authenticate():
-#     def _authenticate(client, username, password):
-#         user = CustomUser.objects.create_user(username=username, password=password)
-#         client.force_login(user)
-#         return client
+@pytest.fixture(scope="session")
+def create_authenticated_client():
+    def _create_authenticated_client(user):
+        client = APIClient()
+        client.force_login(user)
 
-#     return _authenticate
+        return client
+
+    return _create_authenticated_client
+
+
+@pytest.fixture(scope="function")
+def create_simple_user():
+    def _create_simple_user(username="simple_user", password="PaSsW0Rd"):
+        return CustomUser.objects.create_user(username=username, password=password)
+
+    return _create_simple_user
 
 
 @pytest.fixture(scope="function")
