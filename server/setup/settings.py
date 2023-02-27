@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     # local apps
     "users",
+    "filiation",
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+# For date input format in Patient model
+
+DATE_INPUT_FORMATS = ["%d/%m/%Y"]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -148,7 +153,11 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:8000",
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8009",
+    "http://localhost",
+]
 
 # DRF settings
 REST_FRAMEWORK = {
