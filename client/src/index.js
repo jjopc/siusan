@@ -4,6 +4,9 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Landing from "./components/Landing";
 import LogIn from "./features/auth/components/Login";
+import "./App.css";
+
+import "bootswatch/dist/sandstone/bootstrap.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
