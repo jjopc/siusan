@@ -1,10 +1,11 @@
-export const getUser = (data = window.localStorage.getItem("yatahta.auth")) => {
-  // console.log("AUTH_SERVICE -> getUser, data: ", data);
-  // const auth = JSON.parse(window.localStorage.getItem("yatahta.auth"));
+export const getUser = (data = window.localStorage.getItem("siusan.auth")) => {
+  console.log("AUTH_SERVICE -> getUser, data: ", data);
+  // const auth = JSON.parse(window.localStorage.getItem("siusan.auth"));
   if (data) {
     const auth = JSON.parse(data);
+    // console.log(auth.access_token)
     if (auth) {
-      const [header, payload, signature] = auth.access.split(".");
+      const [header, payload, signature] = auth.access_token.split(".");
       const decoded = window.atob(payload);
       return JSON.parse(decoded);
     }
@@ -18,12 +19,12 @@ export const isStaff = () => {
 };
 
 export const getAccessToken = (
-  data = window.localStorage.getItem("yatahta.auth")
+  data = window.localStorage.getItem("siusan.auth")
 ) => {
-  // const auth = JSON.parse(window.localStorage.getItem("yatahta.auth"));
+  // const auth = JSON.parse(window.localStorage.getItem("siusan.auth"));
   const auth = JSON.parse(data);
   if (auth) {
-    return auth.access;
+    return auth.access_token;
   }
   return undefined;
 };

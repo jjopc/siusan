@@ -14,12 +14,29 @@ import {
 import { Formik, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logInReducer, selectIsLoggedIn } from "../state/authSlice";
+import { clearMessage, selectMessage } from "../../../state/messageSlice";
 import Layout from "../../../components/ui/Layout";
 
 export default function LogIn() {
   const [isSubmitted, setSubmitted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const message = useSelector(selectMessage);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   const initialValues = {
     username: "",
@@ -38,7 +55,17 @@ export default function LogIn() {
   });
 
   const handleLogin = ({ username, password }) => {
-    console.log(username, password);
+    dispatch(logInReducer({ username, password }))
+      .unwrap()
+      .then(() => {
+        setSubmitted(true);
+        console.log("Entro por SUCCEED en handleLogin en LogIn");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("Entro por ERROR en handleLogin en LogIn");
+        setSubmitted(false);
+      });
   };
 
   return (
@@ -66,7 +93,7 @@ export default function LogIn() {
                   height={40}
                   className="me-3"
                 />
-                <h1>SIUSAN</h1>
+                <h1 className="mb-0">SIUSAN</h1>
               </Container>
             </Card.Header>
             <Card.Body>
@@ -85,7 +112,7 @@ export default function LogIn() {
                   values,
                 }) => (
                   <>
-                    {/* {message && <Alert variant="danger">{message}</Alert>} */}
+                    {message && <Alert variant="danger">{message}</Alert>}
                     <Form noValidate>
                       <Form.Group className="mb-3" controlId="username">
                         <Form.Label>Nombre de usuario:</Form.Label>

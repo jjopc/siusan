@@ -6,7 +6,7 @@ import axios from "axios";
 export const logInReducer = createAsyncThunk(
   "auth/logIn",
   async ({ username, password }, thunkAPI) => {
-    const url = "/auth/login/";
+    const url = `${process.env.REACT_APP_AUTH_URL}/login/`;
     try {
       // const response = await logIn(username, password);
       const response = await axios.post(url, { username, password });
