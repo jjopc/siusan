@@ -62,8 +62,9 @@ export default function LogIn() {
                 <img
                   src={"cms-logo.svg"}
                   alt="Logo de SIUSAN"
-                  width={50}
-                  height={50}
+                  width={40}
+                  height={40}
+                  className="me-3"
                 />
                 <h1>SIUSAN</h1>
               </Container>
