@@ -10,13 +10,11 @@ export const logInReducer = createAsyncThunk(
     try {
       // const response = await logIn(username, password);
       const response = await axios.post(url, { username, password });
-      window.localStorage.setItem(
-        "siusan.auth",
-        JSON.stringify(response.data)
-      );
+      window.localStorage.setItem("siusan.auth", JSON.stringify(response.data));
       return response.data;
     } catch (error) {
-      const message = error.response.data.detail;
+      // console.log(error.response.data.non_field_errors)
+      const message = error.response.data.non_field_errors;
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue(message);
     }
