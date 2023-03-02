@@ -1,5 +1,5 @@
 export const getUser = (data = window.localStorage.getItem("siusan.auth")) => {
-  console.log("AUTH_SERVICE -> getUser, data: ", data);
+  // console.log("AUTH_SERVICE -> getUser, data: ", data);
   // const auth = JSON.parse(window.localStorage.getItem("siusan.auth"));
   if (data) {
     const auth = JSON.parse(data);

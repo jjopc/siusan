@@ -21,10 +21,23 @@ export const logInReducer = createAsyncThunk(
   }
 );
 
-export const logOutReducer = createAsyncThunk("auth/logOut", (_, thunkAPI) => {
-  window.localStorage.removeItem("siusan.auth");
-  // thunkAPI.dispatch(removePatients());
-});
+export const logOutReducer = createAsyncThunk(
+  "auth/logOut",
+  async (_, thunkAPI) => {
+    const url = `${process.env.REACT_APP_AUTH_URL}/logout/`;
+    try {
+      const response = await axios.post(url);
+      window.localStorage.removeItem("siusan.auth");
+      // thunkAPI.dispatch(removePatients());
+      return response.data;
+    } catch (error) {
+      // console.log(error.response.data.non_field_errors)
+      const message = error.response.data.non_field_errors;
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 const initialState = {
   isLoggedIn: false,
