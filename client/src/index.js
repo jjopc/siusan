@@ -9,6 +9,7 @@ import axios from "axios";
 import App from "./App";
 import Landing from "./components/Landing";
 import LogIn from "./features/auth/components/Login";
+import PasswordReset from "./features/auth/components/PasswordReset";
 import "./App.css";
 
 import "bootswatch/dist/sandstone/bootstrap.css";
@@ -26,6 +27,7 @@ root.render(
             <Route path="/" element={<App />} />
             <Route index element={<Landing />} />
             <Route path="login" element={<LogIn />} />
+            <Route path="password-reset" element={<PasswordReset />} />
           </Routes>
         </PersistGate>
       </Provider>
